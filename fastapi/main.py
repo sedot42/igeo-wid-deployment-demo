@@ -1,7 +1,20 @@
 from typing import Annotated
 from fastapi import FastAPI, HTTPException, Path, Query
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+origins = [
+    "https://igeo-wid-frontend-test.vercel.app",
+    "http://localhost:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_methods=["GET"],
+    # allow_headers=["*"],
+)
 
 books = [
     {"name": "Iliad", "author": "Homer", "year": 800, "genre": "Epic"},
